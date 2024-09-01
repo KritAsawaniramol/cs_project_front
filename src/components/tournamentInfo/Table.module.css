@@ -1,0 +1,46 @@
+.mytable {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+.mytable th,
+.mytable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 200px;;
+  width: 200px;;
+}
+
+.mytable th {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.mytable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.mytable tr:hover {
+  background-color: #ddd;
+}
+
+.winTeam1 {
+  background-color: lightgreen !important;
+}
+
+.winTeam2 {
+  background-color: #ff8080 !important;
+}
+
+.draw {
+  background-color: orange !important;
+}
+
+.none {
+  background-color: grey !important;
+}
+
+.unassigned {
+  background-color: white !important;
+}

@@ -1,0 +1,46 @@
+.matchCard {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    width: 93%;
+    display: flex;
+}
+
+.matchCard h3 {
+    margin-top: 0;
+}
+
+.matchCard p {
+    margin: 5px 0;
+}
+
+.teamLogo {
+    width: 80px; /* Adjust the width of the image as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px;
+}
+
+.match-details {
+    flex-grow: 1;
+}
+
+.teamLogo {
+    width: 30%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.teamLogo {
+    width: 120px;
+    height: 120px;
+    height: auto;
+    float: left;
+    margin: 3px;
+    margin-right: 30px;
+    padding: 3px;
+}

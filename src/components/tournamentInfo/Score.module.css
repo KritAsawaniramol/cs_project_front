@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.mytable {
+  border-collapse: collapse;
+}
+
+.mytable th,
+.mytable td {
+  /* border: 1px solid #ddd; */
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.mytable tr {
+  border: 1px solid #ddd;
+
+}
+.buttonn {
+  width: fit-content;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: lightblue;
+}
+
+.winTeam1 {
+  background-color: lightgreen !important;
+}
+
+.winTeam2 {
+  background-color: #ff8080 !important;
+}
+
+.draw {
+  background-color: orange !important;
+}
+
+.none {
+  background-color: grey !important;
+}
+
+.unassigned {
+  background-color: white !important;
+}

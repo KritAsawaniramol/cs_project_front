@@ -1,0 +1,31 @@
+.table {
+  width: 50%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.table th,
+.table td {
+  border: 1px solid #000; /* Change the color as needed */
+  padding: 8px;
+  align-items: center;
+  text-align: center;
+
+}
+
+.table th {
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.teamContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.teamImage {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; /* Add some space between the image and the team name */
+}

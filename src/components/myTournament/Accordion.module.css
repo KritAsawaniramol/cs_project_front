@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;;
+}
+.datePicker {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}

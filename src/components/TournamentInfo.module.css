@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding-left: 220px;
+  min-height: 100vh;
+  width: 100%;
+  flex-basis: 100%;
+}
+.header {
+  display: flex;
+  width: 100%;
+  height: 180px;
+}
+.textheader {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  padding-top: 100px;
+  padding-left: 20px;
+  -webkit-text-stroke: 1px black;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.filterContainer {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding: 2rem;
+  gap: 1rem;
+}
+.textParticipant {
+  padding: 1rem;
+  font-size: 30px;
+  font-weight: bold;
+}
+.cardContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 2rem 7rem;
+  flex-wrap: wrap;
+  overflow: auto;
+  padding: 2rem;
+}
+
+.content {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+.bracket {
+  display: flex;
+  padding: 1rem 2rem;
+  overflow: auto;
+  width: 1200px;
+  height: 100%;
+}
+.button {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  top: 100px;
+
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: lightblue;
+}
+.button2 {
+  display: flex;
+  position: absolute;
+  right: 130px;
+  top: 100px;
+
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: lightblue;
+}
+.buttonn {
+  width: fit-content;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: lightblue;
+}
+.section {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.section h2{
+  margin-bottom: 10px;
+}

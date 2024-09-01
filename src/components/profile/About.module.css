@@ -1,0 +1,19 @@
+.main {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+.item {
+  display: flex;
+  width: 45%;
+  padding: 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
