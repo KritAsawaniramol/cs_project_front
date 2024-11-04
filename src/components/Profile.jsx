@@ -369,7 +369,7 @@ export default function Profile() {
             style={{ borderBottom: `${stat ? "1px solid black" : ""}` }}
             onClick={handleStat}
           >
-            {role === "normal" ? "Stat" : "Compatition"}
+            {role === "normal" ? "Stat" : "Compatitions"}
           </div>
         </div>
         <div className={style.content}>
