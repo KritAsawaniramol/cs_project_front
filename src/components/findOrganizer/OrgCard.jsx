@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -31,8 +30,8 @@ export default function OrgCard(props) {
               <CardMedia
                 component="img"
                 image={`http://localhost:8080/${item.image_profile_path}`}
-                height={150}
-                sx={{ objectFit: "contain" }}
+               
+                sx={{ objectFit: "contain" , height: '300px'}}
               ></CardMedia>
               <Box sx={{height: '200px', maxHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: "space-between"}}>
               <CardContent>

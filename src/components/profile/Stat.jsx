@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Stat.module.css";
 import Matches from "./Matches";
 import StatCard from "./Card";
 
 export default function StatProfile() {
   const [data, setData] = useState();
-  const id = localStorage.getItem("id");
+  let id = localStorage.getItem("id");
+  if (id == null) {
+    id = localStorage.getItem("otherId");
+  }
 
   useEffect(() => {
     fetchData();
@@ -57,10 +60,10 @@ export default function StatProfile() {
         </div>
         <div className={style.card}>
           <StatCard
-            name={"Goals per compatition"}
+            name={"Goals per match"}
             value={
-              data?.goals_per_compatition !== ""
-                ? data?.goals_per_compatition
+              data?.goals_per_match !== ""
+                ? data?.goals_per_match
                 : 0
             }
             color={"orange"}

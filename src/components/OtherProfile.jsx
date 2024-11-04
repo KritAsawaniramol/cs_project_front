@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./OtherProfile.module.css";
 import About from "./otherProfile/About";
 import Stat from "./otherProfile/Stat";
@@ -12,9 +12,6 @@ export default function OtherProfile() {
   const [stat, setStat] = useState(false);
   const { state } = useLocation();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fetchData = async () => {
     try {
@@ -43,6 +40,10 @@ export default function OtherProfile() {
     setAbout(false);
     setStat(true);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>

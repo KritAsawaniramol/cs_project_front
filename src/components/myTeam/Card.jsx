@@ -1,14 +1,10 @@
 
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import TeamCard2 from "../TeamCard2";
 
 export default function MyTeamCard() {
   const [team, setTeam] = useState([]);
-  const id = localStorage.getItem("id");
-  const [cover, setCover] = useState("");
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();

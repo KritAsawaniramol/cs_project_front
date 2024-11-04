@@ -1,46 +1,16 @@
-import React, { useEffect, useState } from "react";
 import style from "./About.module.css";
-import { IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-export default function About() {
-  const id = localStorage.getItem("id");
-  const role = localStorage.getItem("role");
-  const roleId = localStorage.getItem("roleID");
-  const [data, setData] = useState();
-  const currentDate = new Date();
-  const navigate = useNavigate();
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const res = await fetch(
-        `http://localhost:8080/view/organizer/${roleId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      setData(data.organizer);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const handleEdit = () => {
-    navigate("/editProfile");
-  };
+export default function About({data}) {
+  console.log(data);
+
+
   return (
     <>
       <div className={style.main}>
         <div className={style.container}>
           <div className={style.item}>
-            <span>address:</span>
+            <span>Address:</span>
             {data?.address.country &&
             data?.address.district &&
             data?.address.house_number &&
@@ -70,3 +40,18 @@ export default function About() {
     </>
   );
 }
+
+
+About.propTypes = {
+  data: PropTypes.shape({
+    address: PropTypes.shape({
+      country: PropTypes.string,
+      district: PropTypes.string,
+      house_number: PropTypes.string,
+      subdistrict: PropTypes.string,
+      village: PropTypes.string,
+      postal_code: PropTypes.string,
+    }),
+    phone: PropTypes.string,
+  }),
+};

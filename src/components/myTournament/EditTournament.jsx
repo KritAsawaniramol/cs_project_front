@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./Edit.module.css";
 import { Button, CssBaseline, MenuItem, TextField, Typography } from "@mui/material";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
@@ -9,7 +9,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 export default function EditTournament() {
-  const [data, setData] = useState();
   const [name, setName] = useState("");
   const [sport, setSport] = useState("football");
   const [type, setType] = useState("Tournament");
@@ -39,7 +38,6 @@ export default function EditTournament() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(true);
   const { state } = useLocation();
-  const [banner, setBanner] = useState("");
   const [status, setStatus] = useState("");
   const bannerRef = useRef();
 
@@ -53,8 +51,6 @@ export default function EditTournament() {
         const reader = new FileReader();
         reader.onloadend = async () => {
           const base64String = reader.result;
-          setBanner(base64String);
-          console.log(base64String.length);
 
           // Convert base64String to a Blob
           const blob = dataURItoBlob(base64String);
@@ -166,9 +162,7 @@ export default function EditTournament() {
   const handlePrize = (e) => {
     setPrize(e.target.value);
   };
-  const handleImage = (e) => {
-    setImage(e.target.value);
-  };
+
 
   const handleHouse = (e) => {
     setHouse(e.target.value);
@@ -322,7 +316,6 @@ export default function EditTournament() {
       );
       const data = await res.json();
       console.log(data);
-      setData(data?.compatition);
       setName(data?.compatition.name);
       setSport(data?.compatition.sport);
       setType(data?.compatition.type);

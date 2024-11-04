@@ -1,5 +1,5 @@
-import React from "react";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 
 export default function Info(props) {
   const { data } = props;
@@ -60,3 +60,29 @@ export default function Info(props) {
     </>
   );
 }
+
+Info.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    status: PropTypes.string,
+    start_date: PropTypes.string,
+    end_date: PropTypes.string,
+    address: PropTypes.shape({
+      house_number: PropTypes.string,
+      village: PropTypes.string,
+      district: PropTypes.string,
+      subdistrict: PropTypes.string,
+      postal_code: PropTypes.string,
+      country: PropTypes.string,
+    }),
+    sport: PropTypes.string,
+    sex: PropTypes.string,
+    age_over: PropTypes.number,
+    age_under: PropTypes.number,
+    application_type: PropTypes.string,
+    type: PropTypes.string,
+    organizer_info: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+};

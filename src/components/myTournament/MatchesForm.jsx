@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import style from "./MatchesForm.module.css";
 import { useState } from "react";
 import {
   Button,
-  IconButton,
-  InputAdornment,
   MenuItem,
   TextField,
   Typography,
@@ -12,13 +10,11 @@ import {
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { useLocation, useNavigate } from "react-router-dom";
 import Accordion2 from "./Accordion";
-import { DatePicker, Space } from "antd";
+import { DatePicker } from "antd";
 import dayjs from "dayjs";
 
 export default function MatchesForm() {
   const navigate = useNavigate();
-  const [player1, setPlayer1] = useState([]);
-  const [player2, setPlayer2] = useState([]);
 
   const [goals1, setGoals1] = useState(0);
   const [goals2, setGoals2] = useState(0);
@@ -28,13 +24,12 @@ export default function MatchesForm() {
   const [url, setUrl] = useState("");
   const [time, setTime] = useState();
   const { state } = useLocation();
-  const [data, setData] = useState();
   const [match, setMatch] = useState([]);
   const [compatition, setCompatiton] = useState();
   const [team1Name, setTeam1Name] = useState();
   const [team2Name, setTeam2Name] = useState();
   const [goalRcords, setGoalRcords] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading status
+  const [loading, setLoading] = useState(true); 
 
   const fetchData2 = async () => {
     try {
@@ -51,8 +46,6 @@ export default function MatchesForm() {
       const data = await res.json();
 
       setMatch(data?.match);
-      // setData(data?.compatition.match);
-
     
       let tScore1 = []
       let tScore2 = []
@@ -60,10 +53,6 @@ export default function MatchesForm() {
     
       for (let i = 0; i < data?.match?.goal_records?.length; i++) {
         if (data?.match?.goal_records[i].team_id == data?.match?.team1_id ) {
-          // setTimeScore1([
-          //   ...timeScore1,
-          //   { player_id: nextId++, time_scored: name }
-          // ]);
 
           tScore1.push(data?.match?.goal_records[i]);
         } else {
@@ -80,8 +69,6 @@ export default function MatchesForm() {
       setTeam1Name(data?.match.team1_name)
       setTeam2Name(data?.match.team2_name)
       setGoalRcords(data?.goal_records)
-      setPlayer1(data?.team1_player)
-      setPlayer2(data?.team2_player)
       setTime(dayjs(data?.match.date_time))
 
     } catch (e) {
@@ -110,7 +97,6 @@ export default function MatchesForm() {
       );
       const data = await res.json();
 
-      setData(data?.compatition.match);
       setCompatiton(data);
     } catch (e) {
       console.log(e);
@@ -127,25 +113,6 @@ export default function MatchesForm() {
     setTimeScore2(data)
   }
 
- 
-
-  // const handleTimeScoreChange = (timeScoreNumber, newTimeScore) => {
-  //   if (timeScoreNumber === 1) {
-  //     const updatedTimeScore1 = newTimeScore.map((score) => ({
-  //       ...score,
-  //       matches_id: data?.id, // assuming state.id is your match id
-  //       team_id: data?.team1_id, // assuming team1.id is your team id for team 1
-  //     }));
-  //     setTimeScore1(updatedTimeScore1);
-  //   } else if (timeScoreNumber === 2) {
-  //     const updatedTimeScore2 = newTimeScore.map((score) => ({
-  //       ...score,
-  //       matches_id: data?.id, // assuming state.id is your match id
-  //       team_id: data?.team2_id, // assuming team2.id is your team id for team 2
-  //     }));
-  //     setTimeScore2(updatedTimeScore2);
-  //   }
-  // };
 
   const handleGoals1 = (e) => {
     setGoals1(e.target.value);
@@ -160,7 +127,7 @@ export default function MatchesForm() {
     setUrl(e.target.value);
   };
 
-  const onChange = (value, dateString) => {
+  const onChange = (value) => {
     setTime(value);
 
   };
@@ -197,8 +164,8 @@ export default function MatchesForm() {
       .filter((score) => parseInt(score.player_id) != 0)
       .map((score) => ({
         ...score,
-        matches_id: state.id, // assuming state.id is your match id
-        team_id: match.team1_id, // assuming team1.id is your team id for team 1
+        matches_id: state.id, 
+        team_id: match.team1_id, 
         player_id: parseInt(score.player_id),
         time_scored: parseInt(score.time_scored)
       }));
@@ -215,11 +182,10 @@ export default function MatchesForm() {
       .map((score) => (
         {
         ...score,
-        matches_id: state.id, // assuming state.id is your match id
-        team_id: match.team2_id, // assuming team2.id is your team id for team 2
+        matches_id: state.id, 
+        team_id: match.team2_id, 
         player_id: parseInt(score.player_id),
         time_scored: parseInt(score.time_scored)
-        // assuming team2.id is your team id for team 2
       }));
       console.log(goalRecords2);
       requestBody.goal_records = [

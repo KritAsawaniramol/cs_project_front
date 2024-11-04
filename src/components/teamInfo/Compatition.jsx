@@ -1,6 +1,4 @@
-import React from "react";
-import style from "./Compatition.module.css";
-import { CssBaseline, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { CssBaseline, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +6,7 @@ import PropTypes from "prop-types";
 
 
 export default function Compatition(props) {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const { compatitions } = props;
   console.log("compatitions")
   console.log(compatitions)
@@ -30,8 +28,14 @@ export default function Compatition(props) {
           <TableBody>
             {compatitions?.map((item) => (
               <TableRow
+                onClick={() => {
+                  nav(`/tournamentInfo`, {
+                    state: { id: item.id },
+                  });
+                }}
+                
                 key={item.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 }}}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 }, cursor: 'pointer'}}
               >
                 <TableCell align="center" component="th" scope="row" >
                   {item.name}
@@ -45,7 +49,7 @@ export default function Compatition(props) {
                     backgroundColor: `${item?.rank === "1" ? "#F1C40F" : item?.rank === "2" ? "#5DADE2" : "#FDFEFE"}`
                   }}
                 >
-                  {item?.rank == "0" ? "-" : item?.rank}
+                  {item?.rank == "0" || item?.rank == ""  ? "-" : item?.rank}
                 </TableCell>
                 <TableCell align="center">{item.sport}</TableCell>
                 <TableCell align="center"

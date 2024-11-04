@@ -77,15 +77,15 @@ const router = createBrowserRouter([
   { path: "/findOrganizer", element: <FindOrganizer /> },
   { path: "/otherOrganizer", element: <OtherOrganizer /> },
   { path: "/editOrganizer", element: <EditOrganizer /> },
-// ]);
-// },
- 
+  // ]);
+  // },
+
   {
     path: "/profile",
     element: <Profile />,
   },
   { path: "/myTeam", element: <MyTeam /> },
-{
+  {
     path: "/request",
     element: <Request />,
   },
@@ -115,10 +115,12 @@ const router = createBrowserRouter([
   // },
   // 
 ]);
+
+
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-  <RouterProvider router={router}>
-    <App />
-  </RouterProvider>
-</React.StrictMode>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+  </React.StrictMode>
 )

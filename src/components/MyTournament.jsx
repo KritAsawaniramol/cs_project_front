@@ -1,4 +1,3 @@
-import React from "react";
 import ResponsiveDrawer from './ResponsiveDrawer';
 import style from "./MyTournament.module.css";
 import TournamentCard from "./myTournament/TournamentCard";

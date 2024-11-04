@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ResponsiveDrawer from "./ResponsiveDrawer";
 import style from "./OtherOrganizer.module.css";
-import { AccountCircle } from "@mui/icons-material";
 
 import { useLocation } from "react-router-dom";
 import About from "./organizer/About";
@@ -9,11 +8,10 @@ import Compatition from "./organizer/Compatition";
 import { CssBaseline } from "@mui/material";
 
 export default function OtherOrganizer() {
-  const [profile, setProfile] = useState("");
-  const [cover, setCover] = useState("");
   const [data, setData] = useState();
   const [about, setAbout] = useState(true);
   const [stat, setStat] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { state } = useLocation();
 
   useEffect(() => {
@@ -21,6 +19,8 @@ export default function OtherOrganizer() {
   }, []);
 
   const fetchData = async () => {
+    setIsLoading(true)
+    
     try {
       const res = await fetch(
         `http://localhost:8080/view/organizer/${state.id}`,
@@ -35,6 +35,7 @@ export default function OtherOrganizer() {
       const data = await res.json();
       setData(data.organizer);
       console.log(data.organizer);
+      setIsLoading(false)
     } catch (e) {
       console.log(e);
     }
@@ -49,7 +50,7 @@ export default function OtherOrganizer() {
   };
 
   return (
-    <>
+    !isLoading && <>
     <CssBaseline />
       <ResponsiveDrawer />
       <div className={style.main}>
@@ -58,18 +59,18 @@ export default function OtherOrganizer() {
             className={style.img}
             alt="cover image"
             src={
-              cover !== ""
-                ? cover
-                : `http://localhost:8080/${data?.image_cover_path}`
+              data?.image_cover_path !== ""
+                ? `http://localhost:8080/${data?.image_cover_path}`
+                : ""
             }
           ></img>
           <div className={style.profileContainer}>
             <img
               alt="profile image"
               src={
-                profile !== ""
-                  ? profile
-                  : `http://localhost:8080/${data?.image_profile_path}`
+                data?.image_profile_path !== ""
+                  ? `http://localhost:8080/${data?.image_profile_path}`
+                  : ""
               }
               //`${data?.image_profile_path}`}
               className={style.img}
@@ -79,7 +80,10 @@ export default function OtherOrganizer() {
             {data?.name !== "" ? data?.name : "Organizer name "}
           </div>
           <div className={style.textDescription}>
+            <p style={{overflowY: 'auto', maxHeight: "80px"}}>
+
             {data?.description !== "" ? data?.description : "Description"}
+            </p>
           </div>
         </div>
         <div className={style.tabs}>
@@ -99,7 +103,7 @@ export default function OtherOrganizer() {
           </div>
         </div>
         <div className={style.content}>
-          {about ? <About /> : <Compatition data={data} />}
+          {about ? <About data={data}/> : <Compatition data={data} />}
         </div>
       </div>
     </>

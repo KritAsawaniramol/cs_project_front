@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./RegisterNormal.module.css";
 import { useState } from "react";
 import { Button, CssBaseline, TextField, Typography } from "@mui/material";
@@ -59,7 +58,7 @@ export default function RegisterNormal() {
       <div className={style.container}>
         <SportsSoccerIcon className={style.logo} sx={{ fontSize: 100 }} />
         <Typography variant="h3">Kick-off League</Typography>
-        <Typography variant="h3">Sign up</Typography>
+        <Typography variant="h3">{`Sign up "Normal user"`}</Typography>
         <TextField
           sx={{ width: 400 }}
           label="Email"

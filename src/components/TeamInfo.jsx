@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import style from "./TeamInfo.module.css";
 import ResponsiveDrawer from "./ResponsiveDrawer";

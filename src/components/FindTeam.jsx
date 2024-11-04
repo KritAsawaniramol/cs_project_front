@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import style from "./FindTeam.module.css";
 import TeamCard from "./findTeam/TeamCard";
 import ResponsiveDrawer from "./ResponsiveDrawer";
@@ -6,11 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
 export default function FindTeam() {
-  const [name, setName] = useState("");
   const drawerWidth = 220;
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
+
 
   return (
     <>

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./NextMatch.module.css";
 import ResponsiveDrawer from "./ResponsiveDrawer";
 import MatchCard from "./nextMatch/MatchCard";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 
 export default function NextMatch() {
-  const roleID = localStorage.getItem("roleID");
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -48,15 +47,14 @@ export default function NextMatch() {
         <div>
           {data?.map((nextMatch, index) => {
             const handleClick = () => {
-                console.log(nextMatch.compatition_id)
                 navigate(`/tournamentInfo`, {
                   state: { id: nextMatch.compatition_id },
                 });
               };
             return (
-              <div onClick={handleClick} key={index}>
+              <Box sx={{cursor: 'pointer'}} onClick={handleClick} key={index}>
                 <MatchCard match={nextMatch}  />
-              </div>
+              </Box>
             );
           })}
         </div>

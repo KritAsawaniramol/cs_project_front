@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./Compatition.module.css";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
 import dayjs from "dayjs";
 import { AccountCircle } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types"; 
 
 export default function Compatition(props) {
   const { data } = props;
@@ -109,3 +109,34 @@ export default function Compatition(props) {
     </div>
   );
 }
+
+
+Compatition.propTypes = {
+  data: PropTypes.shape({
+    compatition: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired, 
+        organizer_id: PropTypes.string.isRequired, 
+        name: PropTypes.string,
+        status: PropTypes.string,
+        start_date: PropTypes.string.isRequired, 
+        end_date: PropTypes.string.isRequired, 
+        address: PropTypes.shape({
+          house_number: PropTypes.string,
+          village: PropTypes.string,
+          subdistrict: PropTypes.string,
+          district: PropTypes.string,
+          postal_code: PropTypes.string,
+          country: PropTypes.string,
+        }),
+        sport: PropTypes.string,
+        sex: PropTypes.string,
+        age_over: PropTypes.number,
+        age_under: PropTypes.number,
+        format: PropTypes.string,
+        image_banner: PropTypes.string,
+        organizer_name: PropTypes.string,
+      })
+    ).isRequired, 
+  }).isRequired, 
+};

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types"; // Import PropTypes
 
@@ -16,7 +15,6 @@ import './Card.css';
 
 export default function DefaultCard(props) {
   const { data } = props;
-  const [banner, setBanner] = useState("");
 
   const navigate = useNavigate();
 
@@ -41,19 +39,18 @@ export default function DefaultCard(props) {
             <CardMedia
               sx={{ height: 150 }}
               image={
-                banner !== ""
-                  ? banner
-                  : `http://localhost:8080/${item?.image_banner}`
+                item?.image_banner !== ""
+                  ? `http://localhost:8080/${item?.image_banner}`
+                  : ""
               }
             ></CardMedia>
             <CardContent className="card-content-typography">
               <Typography sx={{ 
 
-                maxWidth: '2600px',        // Limit the width
-                whiteSpace: 'nowrap',     // Prevents text from wrapping to a new line
-                overflow: 'hidden',       // Ensures that overflow content is not displayed
-                textOverflow: 'ellipsis', // Adds an ellipsis (...) to indicate text overflow
-
+                maxWidth: '2600px',      
+                whiteSpace: 'nowrap',    
+                overflow: 'hidden',      
+                textOverflow: 'ellipsis',
                 fontWeight: 'bold', 
                 fontSize: '20px'}}>
                 {item.name === ""

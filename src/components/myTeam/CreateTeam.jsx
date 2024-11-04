@@ -1,10 +1,7 @@
-import React from "react";
 import style from "./CreateTeam.module.css";
 import { useState } from "react";
 import {
   Button,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,8 +12,6 @@ export default function CreateTeam() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
-  const idString = localStorage.getItem("id");
-  const id = parseInt(idString);
 
   const handleCreateTeam = async () => {
     try {

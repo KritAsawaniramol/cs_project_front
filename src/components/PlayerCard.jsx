@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Forward,
 } from '@mui/icons-material'
@@ -13,30 +12,28 @@ function PlayerCard({ item, onClickFunc, handleDeleteMember }) {
 
   console.log(item);
   return (
-    <>
-      <Card sx={{ width: 300 }}>
-
+  
+      <Card sx={{ width: "300px" }}>
         {
           handleDeleteMember ?
             <CardHeader
               action={
                 <IconButton
-                  sx={{ color: 'red' }}
                   onClick={() => handleDeleteMember(item?.id)}
                 >
                   <CloseIcon />
                 </IconButton>
               }
-            />
-            : null
+            /> : null
         }
+        
         <CardMedia
           component="img"
-          image={
-            `http://localhost:8080/${item.image_profile_path}`
-          }
-          height={150}
-          sx={{ objectFit: "contain" }}
+         
+          src={`http://localhost:8080/${item.image_profile_path}`}
+          height={'300px'}
+          
+          sx={{ objectFit: "contain", height: '300px' }}
         ></CardMedia>
         <CardContent>
           <Typography sx={{ fontWeight: 'bold', fontSize: '18px' }}>
@@ -58,7 +55,7 @@ function PlayerCard({ item, onClickFunc, handleDeleteMember }) {
           </IconButton>
         </CardActions>
       </Card>
-    </>
+  
   )
 }
 
@@ -68,7 +65,7 @@ PlayerCard.propTypes = {
     first_name_eng: PropTypes.string,
     last_name_eng: PropTypes.string,
     position: PropTypes.string,
-    image_profile_path: PropTypes.string.isRequired, // Assuming this is required
+    image_profile_path: PropTypes.string.isRequired, 
   }).isRequired,
   onClickFunc: PropTypes.func.isRequired,
   handleDeleteMember: PropTypes.func,

@@ -1,17 +1,12 @@
-import React from "react";
 import style from "./MatchCard.module.css";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types"; 
 
 const MatchCard = ({ match }) => {
   console.log(match?.match_date_time);
   return (
-    <div className={style.matchCard}>
+    <div className={style.matchCard}> 
       <div className={style.teamLogo}>
-        {/* <img
-          src={"src/assets/image/person-circle.svg"}
-          alt="Team Logo"
-          className={style.teamLogo}
-        /> */}
+     
         <img
                 src={`${
                   `http://localhost:8080/${match?.rival_team_image_profile}` !==

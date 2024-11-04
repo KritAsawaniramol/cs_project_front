@@ -1,10 +1,7 @@
-import React from "react";
 import style from "./Login.module.css";
 import { useState } from "react";
 import {
   Button,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
@@ -68,7 +65,7 @@ export default function Login() {
     <>
       <div className={style.container}>
         <SportsSoccerIcon className={style.logo} sx={{ fontSize: 100 }} />
-        <Typography variant="h3">Kick-off League</Typography>
+        <Typography variant="h3">Login</Typography>
         <TextField
           sx={{ width: 400 }}
           label="Email"

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./About.module.css";
-import { IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router-dom";
 
 export default function About() {
   const id = localStorage.getItem("otherId");
@@ -10,7 +7,6 @@ export default function About() {
   const currentDate = new Date();
   const birthDate = new Date(data?.born);
   const age = currentDate.getFullYear() - birthDate.getFullYear();
-  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
@@ -29,9 +25,7 @@ export default function About() {
       console.log(e);
     }
   };
-  const handleEdit = () => {
-    navigate("/editProfile");
-  };
+
   return (
     <>
       <div className={style.main}>

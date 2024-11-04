@@ -75,7 +75,6 @@ function App() {
 
 
     setShowData(result)
-    console.log(result);
 
   };
 
@@ -117,6 +116,9 @@ function App() {
         </div>
 
         {/* search */}
+        <Box p={'3rem'}>
+
+
         <div className={style.filterContainer}>
           <TextField
             name="name"
@@ -168,10 +170,11 @@ function App() {
         </div>
 
         {/* tournament card */}
-        <Box sx={{ p: 3 }}>
+        <Box >
           <div className={style.cardContainer}>
             <Card data={showData} />
           </div>
+        </Box>
         </Box>
       </Box>
     </Box>

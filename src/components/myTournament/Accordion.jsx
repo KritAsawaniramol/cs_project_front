@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import style from "./Accordion.module.css";
+import { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -10,27 +9,23 @@ import PropTypes from "prop-types";
 
 
 export default function Accordion2(props) {
-  const { 
+  const {
     setter1, setter2,
-    goals1, goals2, match, goalRcords , player1, player2, tScore1, tScore2} = props;
-  const [data1, setData1] = useState();
-  const [data2, setData2] = useState();
-  // const [timeScore1, setTimeScore1] = useState([{ player: "", time: "" }]);
-  // const [timeScore2, setTimeScore2] = useState([{ player: "", time: "" }]);
-  const [timeScore1, setTimeScore1] = useState([{ player_id: 0, time_scored:  0}]);
-  const [timeScore2, setTimeScore2] = useState([{ player_id: 0, time_scored:  0}]);
+    goals1, goals2, player1, player2, tScore1, tScore2 } = props;
+
+
+  const [timeScore1, setTimeScore1] = useState([{ player_id: 0, time_scored: 0 }]);
+  const [timeScore2, setTimeScore2] = useState([{ player_id: 0, time_scored: 0 }]);
 
   const fetchData1 = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/view/teams/1`, {
+      await fetch(`http://localhost:8080/view/teams/1`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
-      const data = await res.json();
-      setData1(data.teams.member);
 
     } catch (e) {
       console.log(e);
@@ -38,21 +33,20 @@ export default function Accordion2(props) {
   };
   const fetchData2 = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/view/teams/2`, {
+      await fetch(`http://localhost:8080/view/teams/2`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
-      const data = await res.json();
-      setData2(data.teams.member);
+
 
     } catch (e) {
       console.log(e);
     }
   };
- 
+
 
   useEffect(() => {
     console.log(props);
@@ -76,15 +70,15 @@ export default function Accordion2(props) {
     setter2(timeScore2)
   }, [timeScore1, timeScore2]);
 
-  const handleAddTimeScore1 = (e) => {
+  const handleAddTimeScore1 = () => {
     if (timeScore1.length < goals1) {
-      const newTimeScore = [...timeScore1, { player_id: 0, time_scored:  0}];
+      const newTimeScore = [...timeScore1, { player_id: 0, time_scored: 0 }];
       // onTimeScoreChange(1, newTimeScore)
       setTimeScore1(newTimeScore);
     }
   };
 
-  const handleAddTimeScore2 = (e) => {
+  const handleAddTimeScore2 = () => {
     if (timeScore2.length < goals2) {
       const newTimeScore = [...timeScore2, { player_id: 0, time_scored: 0 }];
       // onTimeScoreChange(2, newTimeScore)
@@ -110,7 +104,7 @@ export default function Accordion2(props) {
   const handlePlayer1 = (e, i) => {
     const onChangeVal = [...timeScore1];
     onChangeVal[i].player_id = parseInt(e.target.value);
-    console.log("onChangeVal: ",onChangeVal);
+    console.log("onChangeVal: ", onChangeVal);
     setTimeScore1(onChangeVal);
   };
   const handleTime1 = (e, i) => {
@@ -129,12 +123,7 @@ export default function Accordion2(props) {
     setTimeScore2(onChangeVal);
   };
 
-  function getPlayerFullNameByID(id, players) {
-    console.log(id);
-    console.log(players);
-    const found = players.find((p) => p.id == id)
-    return  found.first_name_eng + " " + found.last_name_eng
-  }
+
 
   return (
     <>
@@ -144,7 +133,7 @@ export default function Accordion2(props) {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          Goals Record 
+          Goals Record
         </AccordionSummary>
         <AccordionDetails>
           <div style={{ marginBottom: `1rem` }}>
@@ -177,7 +166,7 @@ export default function Accordion2(props) {
                       sx={{ mt: 1, width: 300 }}
                       label="Time (min)"
                       value={item?.time_scored}
-                      error = {
+                      error={
                         parseInt(item?.time_scored) < 0
                       }
                       onChange={(e) => {
@@ -230,7 +219,7 @@ export default function Accordion2(props) {
                       type="number"
                       sx={{ mt: 1, width: 300 }}
                       label="Time (min)"
-                      error = {
+                      error={
                         parseInt(item?.time_scored) < 0
                       }
                       value={item?.time_scored}

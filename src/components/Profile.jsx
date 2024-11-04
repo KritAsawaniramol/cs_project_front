@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResponsiveDrawer from "./ResponsiveDrawer";
 import style from "./Profile.module.css";
 import About from "./profile/About";

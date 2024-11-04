@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Stat.module.css";
 import Matches from "../profile/Matches";
 import StatCard from "../profile/Card";
@@ -56,10 +56,10 @@ export default function StatOther() {
         </div>
         <div className={style.card}>
           <StatCard
-            name={"Goals per compatition"}
+            name={"Goals per match"}
             value={
-              data?.goals_per_compatition !== " "
-                ? data?.goals_per_compatition
+              data?.goals_per_match !== ""
+                ? data?.goals_per_match
                 : 0
             }
             color={"orange"}

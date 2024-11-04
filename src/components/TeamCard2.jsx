@@ -16,18 +16,14 @@ import { useNavigate } from "react-router-dom";
 import GroupIcon from '@mui/icons-material/Group';
 import CloseIcon from '@mui/icons-material/Close';
 
-
 export default function TeamCard2(props) {
     const navigate = useNavigate();
+    const {pathname} = window.location
+
     const { data, tourID, compatitionStatus, orgId } = props;
     const role = localStorage.getItem("role");
     const roleId = localStorage.getItem("roleID");
-    // const [team, setTeam] = useState()
-
-    // useEffect(() => {
-        // setTeam(data)
-    // }, [data]);
-
+    console.log(data);
     const handleDeleteTeam = async (id) => {
         console.log(data);
         try {
@@ -65,7 +61,7 @@ export default function TeamCard2(props) {
                         localStorage.setItem("otherId", item.id);
                     };
 
-                    
+                    console.log(orgId);
                     return (
                         <Card key={index} sx={{ width: 300 }}>
                             <CardHeader
@@ -77,13 +73,12 @@ export default function TeamCard2(props) {
                                             compatitionStatus == "Started"
                                         }
                                         onClick={() => handleDeleteTeam(item.id)}
-                                        sx={{color: 'red'}}
                                     >
                                         <CloseIcon />
                                     </IconButton>
                                 }
                                 sx={{
-                                    display: `${role === "organizer" && roleId == localStorage.getItem("roleID")
+                                    display: `${pathname === "/tournamentInfo" &&  role === "organizer" && orgId == localStorage.getItem("roleID")
                                         ? ""
                                         : "none"
                                         }`,
@@ -94,8 +89,8 @@ export default function TeamCard2(props) {
                             <CardMedia
                                 component="img"
                                 image={`http://localhost:8080/${item.image_profile_path}`}
-                                height={150}
-                                sx={{ objectFit: 'contain' }}
+                           
+                                sx={{ objectFit: 'contain', height: '300px'}}
                             />
 
                             <Box sx={{ height: '200px', maxHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: "space-between" }}>

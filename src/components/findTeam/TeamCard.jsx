@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
-import style from "./TeamCard.module.css";
+import { useEffect, useState } from "react";
 import {
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Forward } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import GroupIcon from '@mui/icons-material/Group';
 import TeamCard2 from "../TeamCard2";
 
 
 export default function TeamCard() {
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
   const [showData, setShowData] = useState([]);
   const [filter, setFilter] = useState("");
 

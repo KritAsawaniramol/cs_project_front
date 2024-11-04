@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./About.module.css";
 import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -72,7 +72,7 @@ export default function About() {
             {role === "normal" ? data?.normal_user.nationality : " "}
           </div>
           <div className={style.item}>
-            <span>address:</span>
+            <span>Address: </span>
             {role === "normal"
               ? data?.normal_user.address.country &&
                 data?.normal_user.address.district &&

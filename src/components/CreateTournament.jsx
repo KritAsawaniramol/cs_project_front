@@ -1,26 +1,11 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import style from "./CreateTournament.module.css";
-import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
+import {  Button, MenuItem, TextField, Typography } from "@mui/material";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { useNavigate } from "react-router-dom";
-import Accordion2 from "./myTournament/Accordion";
-import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
 
 export default function CreateTournament() {
   const [name, setName] = useState("");
@@ -50,7 +35,6 @@ export default function CreateTournament() {
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
   const navigate = useNavigate();
-  const [tournament, setTournament] = useState([]);
 
   const startDateString = dayjs(startDate);
   dayjs.extend(utc);
@@ -96,9 +80,7 @@ export default function CreateTournament() {
   const handlePrize = (e) => {
     setPrize(e.target.value);
   };
-  const handleImage = (e) => {
-    setImage(e.target.value);
-  };
+
 
   const handleHouse = (e) => {
     setHouse(e.target.value);

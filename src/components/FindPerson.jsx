@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import style from "./FindPerson.module.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";

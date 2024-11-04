@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
-import style from "./TournamentInfoCard.module.css";
+import { useEffect, useState } from "react";
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   CardMedia,
   IconButton,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Forward } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 
 export default function TournamentInfoCard(props) {
   const { tourID, compatitionStatus } = props;
   const [data, setData] = useState();
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
-  const roleId = localStorage.getItem("roleID");
 
   useEffect(() => {
     fetchData();
@@ -55,7 +51,7 @@ export default function TournamentInfoCard(props) {
         };
         const handleDeleteTeam = async () => {
           try {
-            const res = fetch(
+            fetch(
               `http://localhost:8080/organizer/competition/${tourID}`,
               {
                 method: "DELETE",
@@ -114,13 +110,11 @@ export default function TournamentInfoCard(props) {
           </Card>
         );
       })}
-      {/* <Button
-        onClick={() => {
-          console.log(data);
-        }}
-      >
-        asd
-      </Button> */}
     </>
   );
 }
+
+TournamentInfoCard.propTypes = {
+  tourID: PropTypes.string.isRequired, 
+  compatitionStatus: PropTypes.string.isRequired, 
+};

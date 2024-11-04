@@ -1,9 +1,10 @@
 import { Box, IconButton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import style from "./Score.module.css";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
+import PropTypes from "prop-types";
 
 export default function Score(props) {
   const { id, update } = props;
@@ -11,7 +12,7 @@ export default function Score(props) {
   const roleId = localStorage.getItem("roleID");
   const [data, setData] = useState();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // State to track loading status
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     fetchData();
@@ -27,7 +28,6 @@ export default function Score(props) {
         credentials: "include",
       });
       const data = await res.json();
-      console.log(data);
       setData(data.compatition);
     } catch (e) {
       console.log(e);
@@ -36,20 +36,6 @@ export default function Score(props) {
     }
   };
 
-
-  const handleVideo = () => {
-    console.log(data.Contact);
-  };
-
-
-  
-
-  function getImageProfile(teamId) {
-    console.log(data);
-    const found = data.teams.find((team) => team.id === teamId)
-    console.log(found.image_profile_path);
-    return ""
-  }
 
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while fetching data
@@ -86,7 +72,6 @@ export default function Score(props) {
           </thead>
           <tbody>
             {data?.match.map((item, index) => {
-              console.log(item);
               const handleUpdate = () => {
                 navigate("/matchesForm", {
                   state: { id: item?.id, comID: data.id },
@@ -238,3 +223,8 @@ export default function Score(props) {
     </Box>
   );
 }
+
+Score.propTypes = {
+  id: PropTypes.string.isRequired, 
+  update: PropTypes.func.isRequired, 
+};

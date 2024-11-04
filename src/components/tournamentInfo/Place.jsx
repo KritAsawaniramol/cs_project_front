@@ -1,28 +1,13 @@
-import React from "react";
 import style from "./Place.module.css";
+import PropTypes from "prop-types";
 
 export default function Place(props) {
   const { teams, type } = props;
-  // const mockData = [
-  //   { place: 1, team: "Team A" },
-  //   { place: 2, team: "Team B" },
-  //   { place: 3, team: "Team C" },
-  //   { place: 4, team: "Team D" },
-  //   { place: 5, team: "Team E" },
-  //   { place: 6, team: "Team F" },
-  //   { place: 7, team: "Team G" },
-  //   { place: 8, team: "Team H" },
-  //   { place: 9, team: "Team I" },
-  //   { place: 10, team: "Team J" },
-  // ];
-
 
   console.log(teams)
   teams?.sort(function(a,b) {
     return a.rank_number - b.rank_number;
   })
-
-
 
   return (
     <table className={style.table}>
@@ -64,3 +49,18 @@ export default function Place(props) {
     </table>
   );
 }
+
+Place.propTypes = {
+  teams: PropTypes.arrayOf(
+    PropTypes.shape({
+      rank: PropTypes.string,
+      rank_number: PropTypes.number.isRequired,
+      image_profile_path: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      point: PropTypes.number, 
+      goals_scored: PropTypes.number, 
+      goals_conceded: PropTypes.number, 
+    })
+  ).isRequired,
+  type: PropTypes.string.isRequired, 
+};

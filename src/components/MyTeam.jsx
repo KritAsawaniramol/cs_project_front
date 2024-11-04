@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import style from "./MyTeam.module.css";
 import ResponsiveDrawer from "./ResponsiveDrawer";
-import { Box, Button, colors, CssBaseline } from "@mui/material";
+import { Box, Button, CssBaseline } from "@mui/material";
 import MyTeamCard from "./myTeam/Card";
 import { useNavigate } from "react-router-dom";
 import JoinTeam from "./myTeam/JoinTeam";

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Overview.module.css";
 import { CssBaseline } from "@mui/material";
+import PropTypes from "prop-types";
 
 export default function Overview(props) {
   const { data } = props;
@@ -36,13 +37,7 @@ export default function Overview(props) {
           <p className={style.newsItemDescription}>
             {data?.description !== "" ? data?.description : "-"}
           </p>
-          {/* <button
-            onClick={() => {
-              console.log(owner);
-            }}
-          >
-            data
-          </button> */}
+        
         </div>
 
         <div className={style.newsItem}>
@@ -57,8 +52,19 @@ export default function Overview(props) {
           </p>
         </div>
       </div>
-
-      {/* Add more news items as needed */}
     </>
   );
 }
+
+Overview.propTypes = {
+  data: PropTypes.shape({
+    description: PropTypes.string,
+    normalUser: PropTypes.shape({
+      normal_user_info: PropTypes.shape({
+        first_name_eng: PropTypes.string,
+        last_name_eng: PropTypes.string,
+        phone: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Incoming.module.css";
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 export default function Incoming(props) {
   const { search } = props;
   const [request, setRequest] = useState();
-  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
@@ -86,7 +84,7 @@ export default function Incoming(props) {
             }
           };
           return (
-            <div key={index} className={style.container}>
+            <Box padding={"20px"} key={index} className={style.container}>
               <div className={style.info}>
                 <img
                   className={style.img}
@@ -107,7 +105,7 @@ export default function Incoming(props) {
                   <ClearIcon />
                 </IconButton>
               </div>
-            </div>
+            </Box>
           );
         })}
     </>

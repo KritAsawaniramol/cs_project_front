@@ -1,18 +1,14 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Stack from '@mui/material/Stack';
@@ -29,44 +25,24 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-// import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import style from './ResponsiveDrawer.module.css';
 
-
 function ResponsiveDrawer() {
   const drawerWidth = 220;
-  let status = 1;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
   const [drawerItems, setDrawerItems] = React.useState([]);
 
   const { pathname } = useLocation();
-
-
-  console.log("pathname: ", pathname);
 
   useEffect(() => {
     setDrawer();
   }, []);
   const handleDrawerClose = () => {
-    setIsClosing(true);
     setMobileOpen(false);
   };
 
   const navigate = useNavigate();
-
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
 
   const drawerItemBeforeLogin = [
     {
@@ -151,14 +127,13 @@ function ResponsiveDrawer() {
   };
 
   const handleLogout = async () => {
-    const res = await fetch("http://localhost:8080/auth/logout", {
+    await fetch("http://localhost:8080/auth/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
     });
-    const data = await res.json();
     localStorage.clear();
     navigate("/");
     window.location.reload();
@@ -240,9 +215,7 @@ function ResponsiveDrawer() {
           <Divider />
 
           <Box
-            sx={{
-              marginBottom: '100px'
-            }}
+         
           >
 
 
@@ -306,7 +279,6 @@ function ResponsiveDrawer() {
         <Drawer
           variant="temporary"
           open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.

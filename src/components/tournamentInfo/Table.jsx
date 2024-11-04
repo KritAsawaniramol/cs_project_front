@@ -1,13 +1,11 @@
-import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Table.module.css";
+import PropTypes from "prop-types";
 
 export default function Table(props) {
   const { id } = props;
   const [data, setData] = useState();
-  // const [team, setTeam] = useState([]);
 
-  const team = [];
   useEffect(() => {
     fetchData();
   }, []);
@@ -16,17 +14,12 @@ export default function Table(props) {
     try {
       const res = await fetch(`http://localhost:8080/view/competition/${id}`, {
         method: "GET",
-        headers: {
-          // Your headers here
-        },
       });
       const data = await res.json();
       setData(data);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
-
-    const teams = data ? getTeam(data) : [];
   };
 
 
@@ -62,30 +55,39 @@ export default function Table(props) {
             };
           }
         } else {
+          console.log(compatition.match);
           for (let j = 0; j < compatition.match.length; j++) {
-
             if (compatition.match[j].team1_id == team[i].id) {
               const index = parseInt(
                 team.map((x) => x.id).indexOf(compatition.match[j].team2_id)
               );
               if (i != index) {
+                // console.log(compatition.match[j].result)
+
+                // console.log(`x: ${i}, y: ${index} ${compatition.match[j].team1_goals +
+                //   " - " +
+                //   compatition.match[j].team2_goals}`);
+                // console.log(`x: ${index}, y: ${i} ${compatition.match[j].team2_goals +
+                //   " - " +
+                //   compatition.match[j].team1_goals}`);
                 match[i][index] = {
                   score:
                     compatition.match[j].team1_goals +
                     " - " +
                     compatition.match[j].team2_goals,
-                  result: compatition.match[j].result,
+                  result: compatition.match[j].result ,
                 };
                 match[index][i] = {
                   score:
                     compatition.match[j].team2_goals +
                     " - " +
                     compatition.match[j].team1_goals,
-                  result: compatition.match[j].result,
+                  result: compatition.match[j].result === "Team1Win" ? "Team2Win" : "Team1Win",
                 };
               }
             }
           }
+          console.log(match);
         }
   
         match[i][i] = {
@@ -158,10 +160,12 @@ export default function Table(props) {
               {team.name}
             </th>
             {match[i].map((m, j) => {
-              const isWin =
-                // (m.result === "Team1Win" && i < j) ||
-                (m.result === "Team1Win" && i > j) ||
-                (m.result === "Team2Win" && i < j);
+              if (i == 2 && j == 1) {
+                console.log(m.result);
+              }
+              const isWin = m.result === "Team1Win" 
+                // (m.result === "Team1Win" && i < j) 
+                // || (m.result === "Team2Win" && i > j);
               const isLoss = m.result !== "" && !isWin && m.result !== "none" && m.result !== "Draw";
               const isNone = m.result === "none";
               const isDraw = m.result === "Draw"
@@ -206,4 +210,8 @@ export default function Table(props) {
       </tbody>
     </table>
   );
+}
+
+Table.propTypes = {
+  id: PropTypes.string.isRequired, 
 }

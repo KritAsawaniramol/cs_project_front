@@ -3,12 +3,8 @@ import ResponsiveDrawer from "./ResponsiveDrawer";
 import style from "./EditOrganizer.module.css";
 import { Button, CssBaseline, MenuItem, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { DatePicker } from "antd";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 
 export default function EditOrganizer() {
-  const id = localStorage.getItem("id");
   const role = localStorage.getItem("role");
   const roleId = localStorage.getItem("roleID");
   const navigate = useNavigate();
@@ -22,11 +18,7 @@ export default function EditOrganizer() {
   const [phone, setPhone] = useState("");
 
 
-
-
-
   const [description, setDescription] = useState("");
-
 
 
   const countries = [

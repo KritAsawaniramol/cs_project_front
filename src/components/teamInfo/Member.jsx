@@ -1,18 +1,18 @@
 import {
-
+  Box,
   CssBaseline,
+  Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PlayerCard from "../playerCard";
 
-
-export default function Member(props) {
-  const { teamID } = props;
+export default function Member() {
 
   const id = localStorage.getItem("teamId");
   const me = localStorage.getItem("id");
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function Member(props) {
   }, []);
 
   const fetchData = async () => {
+    setIsLoading(true)
     try {
       const res = await fetch(`http://localhost:8080/view/teams/${id}`, {
         method: "GET",
@@ -29,11 +30,13 @@ export default function Member(props) {
         credentials: "include",
       });
       const data = await res.json();
+
       setData(data.teams);
       console.log(data);
     } catch (e) {
       console.log(e);
     }
+    setIsLoading(false)
   };
 
   const handleDeleteMember = async (selectedID) => {
@@ -59,23 +62,29 @@ export default function Member(props) {
   return (
     <>
       <CssBaseline />
-      {data?.member?.map((item, index) => {
-        const handleClick = () => {
-          navigate("/otherProfile", { state: { id: item.id } });
-          localStorage.setItem("otherId", item.id);
-        };
+      {
+        !isLoading &&
+        <>
+          <Typography sx={{ width: '100%' }} variant="h2">Member: {data?.member?.length || 0}</Typography>
+          {
+            data?.member?.map((item, index) => {
+              const handleClick = () => {
+                navigate("/otherProfile", { state: { id: item.id } });
+                localStorage.setItem("otherId", item.id);
+              };
+              return (
+                <Box key={index}>
+                  {
+                    data?.owner_id == me ?
+                      <PlayerCard key={index} item={item} onClickFunc={handleClick} handleDeleteMember={handleDeleteMember} />
+                      : <PlayerCard key={index} item={item} onClickFunc={handleClick} />
+                  }
+                </Box>
+              );
+            })}
+        </>
+      }
 
-        return (
-          <>
-            {
-              data?.owner_id == me ? 
-              <PlayerCard key={index} item={item} onClickFunc={handleClick} handleDeleteMember={handleDeleteMember} />
-              :<PlayerCard key={index} item={item} onClickFunc={handleClick}  />
-            
-            }
-          </>
-        );
-      })}
     </>
   );
 }

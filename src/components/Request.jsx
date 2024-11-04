@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Request.module.css";
 import ResponsiveDrawer from "./ResponsiveDrawer";
 import { Box, CssBaseline, IconButton, InputAdornment, TextField } from "@mui/material";
@@ -68,9 +68,11 @@ export default function Request() {
             }}
           ></TextField>
         </div>
-        <div className={style.text}>PENDING - {request?.length}</div>
-        <div className={style.content}> </div>
+        <div className={style.text}>PENDING - {request?.length || 0}</div>
+        <div className={style.content}> 
+
         <Incoming search={name} />
+        </div>
         </Box>
       </Box>
     </>

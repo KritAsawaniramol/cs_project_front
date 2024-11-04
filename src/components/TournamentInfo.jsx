@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./TournamentInfo.module.css";
 import ResponsiveDrawer from './ResponsiveDrawer';
-import Card from './card/Card';
 import Table from "./tournamentInfo/Table";
 import Score from "./tournamentInfo/Score";
 import Bracket from "./tournamentInfo/Bracket";
@@ -13,12 +12,8 @@ import Modal from "@mui/material/Modal";
 import Grid from '@mui/material/Grid';
 
 import { CssBaseline, MenuItem, TextField } from "@mui/material";
-// import Status from "./Status";
-// import dayjs from "dayjs";
 import Info from "./tournamentInfo/Info";
-// import BasicTable from "./BasicTable";
 import Place from "./tournamentInfo/Place";
-import TournamentInfoCard from "./tournamentInfo/TournamentInfoCard";
 import TeamCard2 from "./TeamCard2";
 
 const styled = {
@@ -35,16 +30,12 @@ const styled = {
 
 export default function TournamentInfo() {
     const [data, setData] = useState();
-    const [open, setOpen] = useState(false);
-    const [update, setUpdate] = useState(false);
     const [join, setJoin] = useState(false);
     const role = localStorage.getItem("role");
     const roleId = localStorage.getItem("roleID");
-    const id = localStorage.getItem("id");
-    const [isJoinCode, setIsJoinCode] = useState();
     const [number, setNumber] = useState("");
     const [code, setCode] = useState();
-    const [banner, setBanner] = useState("");
+    // const [banner, setBanner] = useState("");
 
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -54,7 +45,7 @@ export default function TournamentInfo() {
     useEffect(() => {
         fetchData();
         if (role !== "organizer") {
-        fetchTeam();
+            fetchTeam();
         }
     }, []);
     const fetchData = async () => {
@@ -77,25 +68,25 @@ export default function TournamentInfo() {
         }
     };
 
-        const fetchTeam = async () => {
-            try {
-                const res = await fetch(`http://localhost:8080/user/teams`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                });
-                const data = await res.json();
-                setTeam(data.teams);
-    
-                console.log("Team: ", data.teams);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-    
-    
+    const fetchTeam = async () => {
+        try {
+            const res = await fetch(`http://localhost:8080/user/teams`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+            const data = await res.json();
+            setTeam(data.teams);
+
+            console.log("Team: ", data.teams);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+
     const handleEdit = () => {
         navigate("/editTournament", { state: { id: state.id } });
     };
@@ -111,20 +102,30 @@ export default function TournamentInfo() {
     };
     const handleJoin = async () => {
         if (data?.application_type === "free") {
-            const res = await fetch(`http://localhost:8080/user/competition/join`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-                body: JSON.stringify({
-                    compatition_id: state.id,
-                    team_id: teamID,
-                }),
-            });
-            alert("Join success");
+            try {
+                const res = await fetch(`http://localhost:8080/user/competition/join`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        compatition_id: state.id,
+                        team_id: teamID,
+                    }),
+                });
+             
+                const json = await res.json();
+                if (!res.ok) {
+                    throw json;
+                }
+                alert("Join success");
+                window.location.reload();
+
+            } catch (error) {
+                alert(error.message)
+            }
             handleJoinClose();
-            window.location.reload();
         } else {
             if (code === "") {
                 alert("Error: Code cannot be empty");
@@ -155,7 +156,7 @@ export default function TournamentInfo() {
             handleJoinClose();
         }
     };
- 
+
     const handleUpdateMatch = () => {
         navigate("/matchesForm", { state: { id: data?.Matchs[0].id } });
     };
@@ -267,7 +268,7 @@ export default function TournamentInfo() {
     const handleJoinCode = async () => {
         try {
             if (number > 0 && number <= 64) {
-                const res = await fetch(
+                await fetch(
                     `http://localhost:8080/organizer/competition/joinCode/add/${state.id}`,
                     {
                         method: "PUT",
@@ -641,9 +642,9 @@ export default function TournamentInfo() {
                                 objectFit: `cover`,
                             }}
                             src={
-                                banner !== ""
-                                    ? banner
-                                    : `http://localhost:8080/${data?.image_banner}`
+                                data?.image_banner !== ""
+                                    ? `http://localhost:8080/${data?.image_banner}`
+                                    : ""
                             }
                         ></img>
                     </div>
@@ -740,12 +741,7 @@ export default function TournamentInfo() {
                     </div>
                 </div>
                 <div className={style.cardContainer}>
-                    <TeamCard2 data={data?.teams || []} tourID={data?.id} compatitionStatus={data?.status} orgId={data?.id} />
-
-                    {/* <TournamentInfoCard
-                        tourID={state.id}
-                        compatitionStatus={data?.status}
-                    /> */}
+                    <TeamCard2 data={data?.teams || []} tourID={data?.id} compatitionStatus={data?.status} orgId={data?.organizer_info.id} />
                 </div>
 
                 <div className={style.textParticipant}>
