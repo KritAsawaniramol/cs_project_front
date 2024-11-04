@@ -38,6 +38,7 @@ export default function TeamInfo() {
   const [isMember, setIsMember] = useState(false);
   const [isOverview, setIsOverview] = useState(true);
   const [isCompatition, setIsCompatition] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const id = localStorage.getItem("id");
   const role = localStorage.getItem("role");
   const ownerId = localStorage.getItem("ownerTeamId");
@@ -217,6 +218,7 @@ export default function TeamInfo() {
     fetchData();
   }, []);
   const fetchData = async () => {
+    setIsLoading(true)
     try {
       const res = await fetch(`http://localhost:8080/view/teams/${state?.id}`, {
         method: "GET",
@@ -233,9 +235,10 @@ export default function TeamInfo() {
     } catch (e) {
       console.log(e);
     }
+    setIsLoading(false)
   };
   return (
-    <>
+    !isLoading && <>
       <Modal
         open={modal1}
         onClose={handleCloseModal1}
@@ -312,8 +315,16 @@ export default function TeamInfo() {
             style={{ display: `none` }}
             onChange={handleCoverFileChange}
           ></input>
-          <div className={style.textHeader}>{data?.name}</div>
-          <div className={style.textDescription}>{data?.description}</div>
+          <div className={style.textHeader}>
+            <p style={{overflowY: 'auto'}}>
+            {data?.name}
+            </p>
+            </div>
+          <div className={style.textDescription}>
+          <p style={{overflowY: 'auto', maxHeight: "80px"}}> 
+            {data?.description}
+            </p>
+            </div>
           <button
             className={style.inviteButton}
             style={{
@@ -375,7 +386,7 @@ export default function TeamInfo() {
               className={style.button}
               onClick={handleCompatitionTab}
             >
-              Compatitions
+              Competitions
             </div>
           </div>
           <div className={style.content}>
