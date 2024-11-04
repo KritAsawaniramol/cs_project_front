@@ -5,28 +5,30 @@ import PropTypes from "prop-types";
 
 export default function Overview(props) {
   const { data } = props;
-  const id = localStorage.getItem("roleID");
   const [owner, setOwner] = useState();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/view/normalUsers/${id}`, {
+      const res = await fetch(`http://localhost:8080/view/normalUsers/${data.owner_id}`, 
+        {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
-      const data = await res.json();
-      setOwner(data.normalUser.normal_user_info);
-      console.log(data);
+      const json = await res.json();
+      setOwner(json.normalUser.normal_user_info);
+      console.log(json);
     } catch (e) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
     <CssBaseline />
@@ -58,6 +60,7 @@ export default function Overview(props) {
 
 Overview.propTypes = {
   data: PropTypes.shape({
+    owner_id: PropTypes.number,
     description: PropTypes.string,
     normalUser: PropTypes.shape({
       normal_user_info: PropTypes.shape({
