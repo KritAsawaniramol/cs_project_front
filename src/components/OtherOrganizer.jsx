@@ -99,7 +99,7 @@ export default function OtherOrganizer() {
             style={{ borderBottom: `${stat ? "1px solid black" : ""}` }}
             onClick={handleStat}
           >
-            Compatition
+            Competitions
           </div>
         </div>
         <div className={style.content}>
