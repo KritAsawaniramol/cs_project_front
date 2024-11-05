@@ -1,5 +1,5 @@
 <h1 align="center">
-  Book-Store Microservice
+  Kick-off league (client)
   <br>
 </h1>
 
